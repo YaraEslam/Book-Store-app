@@ -14,6 +14,7 @@ public class APIClient {
     public static final String UserRegister = Base_url + "users/register";
     public static final String UserLogin = Base_url + "users/login";
     public static final String GetMe = Base_url + "users/me";
+    public static final String BuyBook = Base_url + "books/buy/";
 
     public static Retrofit getClient(){
         if (retrofit == null){

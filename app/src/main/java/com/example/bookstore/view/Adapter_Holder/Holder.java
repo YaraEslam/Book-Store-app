@@ -1,8 +1,6 @@
 package com.example.bookstore.view.Adapter_Holder;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookstore.R;
 
-import com.example.bookstore.network.model.ItemModel;
+import com.example.bookstore.network.models.ItemModel;
 import com.squareup.picasso.Picasso;
 
 public class Holder extends RecyclerView.ViewHolder {

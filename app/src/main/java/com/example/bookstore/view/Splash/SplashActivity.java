@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.example.bookstore.R;
-import com.example.bookstore.view.Main.MainActivity;
+import com.example.bookstore.view.Main.Activity.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

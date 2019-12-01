@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.bookstore.R;
 import com.example.bookstore.network.APIInterface;
 import com.example.bookstore.network.api.APIClient;
-import com.example.bookstore.network.model.ItemModel;
+import com.example.bookstore.network.models.ItemModel;
+import com.example.bookstore.network.models.UserInfo;
+import com.example.bookstore.utils.PrefManager;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +27,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BookDetailsActivity extends AppCompatActivity implements View.OnClickListener {
-
 
     @BindView(R.id.book_image_details)
     ImageView bookImageDetails;
@@ -45,6 +46,8 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     Button placeOrder;
     @BindView(R.id.book_details)
     TextView bookDetails;
+    @BindView(R.id.rating_tv)
+    TextView ratingTv;
 
     private ItemModel itemModel;
 
@@ -62,12 +65,18 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         id = itemModel.getId();
 
         bookDetails.setOnClickListener(this);
+        placeOrder.setOnClickListener(this);
 
-       getBook();
+        rating.setOnRatingBarChangeListener((ratingBar, v, b) -> {
+            Toast.makeText(BookDetailsActivity.this, "Stars: "+ v, Toast.LENGTH_SHORT).show();
+            itemModel.setRating(v);
+        });
+
+        getBook();
 
     }
 
-    void getBook(){
+    void getBook() {
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
 
         apiInterface.getBookById(id).enqueue(new Callback<ItemModel>() {
@@ -80,13 +89,13 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                             .load(response.body().getImage_book())
                             .placeholder(R.drawable.ic_image)
                             .into(bookImageDetails);
-
                     bookNameDetails.setText(response.body().getBook_name());
                     bookAuthorNameDetails.setText(response.body().getAuthor());
                     bookPriceDetails.setText("$" + response.body().getBook_price());
                     bookInformation.setText(response.body().getBookDescription());
                     aboutAuthor.setText(response.body().getAboutAuthor());
-                    rating.setNumStars(response.body().getTotalRating());
+                    //rating.setNumStars(response.body().getTotalRating());
+                   // ratingTv.setText(response.body().getTotalRating());
                 }
             }
 
@@ -94,23 +103,47 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
             public void onFailure(@NotNull Call<ItemModel> call,
                                   @NotNull Throwable t) {
                 Toast.makeText(BookDetailsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
         });
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.book_details:
                 super.onBackPressed();
                 finish();
                 break;
 
             case R.id.place_order:
-
+                buyBook();
                 break;
         }
+    }
 
+    void buyBook() {
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+
+        apiInterface.BuyBook(id, PrefManager.getToken(BookDetailsActivity.this))
+                .enqueue(new Callback<UserInfo>() {
+                    @Override
+                    public void onResponse(@NotNull Call<UserInfo> call,
+                                           @NotNull Response<UserInfo> response) {
+                        if (response.isSuccessful()) {
+                            Toast.makeText(BookDetailsActivity.this, "Buying Success",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(BookDetailsActivity.this, "Buying fail",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NotNull Call<UserInfo> call,
+                                          @NotNull Throwable t) {
+                        Toast.makeText(BookDetailsActivity.this, t.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

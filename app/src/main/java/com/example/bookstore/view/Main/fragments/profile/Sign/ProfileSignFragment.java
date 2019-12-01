@@ -78,16 +78,14 @@ public class ProfileSignFragment extends Fragment implements Sign{
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.sign_btn:
+                String email = signEmail.getText().toString();
+                String password = signPassword.getText().toString();
                 if (groupSign.getVisibility() == View.VISIBLE) {
                     String name = signName.getText().toString();
-                    String email = signEmail.getText().toString();
                     String phone = signMobile.getText().toString();
                     String address = signAddress.getText().toString();
-                    String password = signPassword.getText().toString();
                     signPresenter.checkRegister(name, email, phone, address, password, getActivity());
                 } else {
-                    String email = signEmail.getText().toString();
-                    String password = signPassword.getText().toString();
                     signPresenter.checkLogin(email, password, getActivity());
                 }
                 break;

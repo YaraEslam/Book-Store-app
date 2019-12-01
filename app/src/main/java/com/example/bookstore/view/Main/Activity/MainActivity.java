@@ -1,4 +1,4 @@
-package com.example.bookstore.view.Main;
+package com.example.bookstore.view.Main.Activity;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;

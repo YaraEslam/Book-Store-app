@@ -23,10 +23,11 @@ public class SignPresenter implements SignInteractor.OnRegisterFinishedListner{
             signView.emailError("Invalid Email");
         }else if (phone.isEmpty()) {
             signView.phoneError();
+        }else if (address.isEmpty()) {
+            signView.addressError();
         } else if (password.isEmpty()) {
             signView.passwordError();
         }else {
-
             signInteractor.register(name, email, phone, address, password,
                     this, context);
         }

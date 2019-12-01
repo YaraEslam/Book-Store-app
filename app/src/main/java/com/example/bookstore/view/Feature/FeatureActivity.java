@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.bookstore.R;
 import com.example.bookstore.network.APIInterface;
 import com.example.bookstore.network.api.APIClient;
-import com.example.bookstore.network.model.ItemModel;
+import com.example.bookstore.network.models.ItemModel;
 import com.example.bookstore.view.Adapter_Holder.Adapter;
 import com.example.bookstore.view.Adapter_Holder.Enum;
 import com.example.bookstore.view.Adapter_Holder.onItemClicked;

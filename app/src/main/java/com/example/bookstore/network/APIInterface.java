@@ -1,10 +1,11 @@
 package com.example.bookstore.network;
 
 import com.example.bookstore.network.api.APIClient;
-import com.example.bookstore.network.model.ItemModel;
-import com.example.bookstore.network.model.MyBooks;
-import com.example.bookstore.network.model.SignForm;
-import com.example.bookstore.network.model.Token;
+import com.example.bookstore.network.models.ItemModel;
+import com.example.bookstore.network.models.MyBooks;
+import com.example.bookstore.network.models.SignForm;
+import com.example.bookstore.network.models.Token;
+import com.example.bookstore.network.models.UserInfo;
 
 
 import java.util.List;
@@ -37,5 +38,8 @@ public interface APIInterface {
     Call<Token> login(@Body SignForm signForm);
 
     @GET(APIClient.GetMe)
-    Call<SignForm> getMy(@Header("x-auth-token") String token);
+    Call<UserInfo> getMy(@Header("x-auth-token") String token);
+
+    @POST(APIClient.BuyBook + "{id}")
+    Call<UserInfo> BuyBook(@Path("id")String id, @Header("x-auth-token") String token);
 }

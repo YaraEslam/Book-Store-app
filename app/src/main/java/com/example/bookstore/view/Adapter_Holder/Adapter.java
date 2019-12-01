@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bookstore.R;
-import com.example.bookstore.network.model.ItemModel;
+import com.example.bookstore.network.models.ItemModel;
 
 
 import java.util.List;

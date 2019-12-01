@@ -1,4 +1,4 @@
-package com.example.bookstore.network.model;
+package com.example.bookstore.network.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

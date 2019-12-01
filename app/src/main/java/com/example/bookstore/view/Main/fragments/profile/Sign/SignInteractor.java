@@ -5,8 +5,8 @@ import android.widget.Toast;
 
 import com.example.bookstore.network.APIInterface;
 import com.example.bookstore.network.api.APIClient;
-import com.example.bookstore.network.model.SignForm;
-import com.example.bookstore.network.model.Token;
+import com.example.bookstore.network.models.SignForm;
+import com.example.bookstore.network.models.Token;
 import com.example.bookstore.utils.PrefManager;
 
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +39,7 @@ public class SignInteractor {
                 if (response.isSuccessful()){
                     PrefManager.saveToken(context, response.body().getAccessToken());
                     onRegisterFinishedListner.onSuccess();
-                 Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "Auth error!", Toast.LENGTH_SHORT).show();
                 }

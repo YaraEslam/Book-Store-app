@@ -12,15 +12,12 @@ import android.widget.TextView;
 import com.example.bookstore.R;
 import com.example.bookstore.network.APIInterface;
 import com.example.bookstore.network.api.APIClient;
-import com.example.bookstore.network.model.SignForm;
+import com.example.bookstore.network.models.UserInfo;
 import com.example.bookstore.utils.PrefManager;
 import com.example.bookstore.view.Main.fragments.profile.Sign.ProfileSignFragment;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,10 +62,10 @@ public class ProfileUserFragment extends Fragment {
         APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
 
         apiInterface.getMy(PrefManager.getToken(getActivity())).
-                enqueue(new Callback<SignForm>() {
+                enqueue(new Callback<UserInfo>() {
                     @Override
-                    public void onResponse(@NotNull Call<SignForm> call,
-                                           @NotNull Response<SignForm> response) {
+                    public void onResponse(@NotNull Call<UserInfo> call,
+                                           @NotNull Response<UserInfo> response) {
                         if (response.isSuccessful()){
 
                             Picasso.get()
@@ -79,13 +76,12 @@ public class ProfileUserFragment extends Fragment {
                             profileUsername.setText(response.body().getName());
                             profileEmail.setText(response.body().getEmail());
                             profileMobile.setText(response.body().getPhone());
-
                         }
 
                     }
 
                     @Override
-                    public void onFailure(@NotNull Call<SignForm> call,
+                    public void onFailure(@NotNull Call<UserInfo> call,
                                           @NotNull Throwable t) {
 
                     }

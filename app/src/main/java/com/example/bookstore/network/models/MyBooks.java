@@ -1,4 +1,4 @@
-package com.example.bookstore.network.model;
+package com.example.bookstore.network.models;
 
 import java.io.Serializable;
 import java.util.List;
